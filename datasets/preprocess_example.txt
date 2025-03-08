@@ -1,0 +1,4 @@
+folder_path = "your_path"
+target_width = 100
+target_height = 100
+resize_and_crop_png_images(folder_path, target_width, target_height)
