@@ -1,3 +1,5 @@
+import torch
+
 class Residual(torch.nn.Module):
     def __init__(self, in_ch, out_ch, kernel, f_act):
         super().__init__()
