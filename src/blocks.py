@@ -26,7 +26,7 @@ class Inception(torch.nn.Module):
             torch.nn.Conv2d(in_channels = out_1, out_channels = out_5, kernel_size = 5, padding = 2)
         )
         self.pool = torch.nn.Sequential(
-            torch.nn.MaxPool2d(kernel_size = 2, stride = 1, padding = 1),
+            torch.nn.MaxPool2d(kernel_size = 3, stride = 1, padding = 1),
             torch.nn.Conv2d(in_channels = in_ch, out_channels = out_1, kernel_size = 1)
         )
 
