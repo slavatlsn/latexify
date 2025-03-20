@@ -13,7 +13,7 @@ class Residual(torch.nn.Module):
 
 class Inception(torch.nn.Module):
     def __init__(self, in_ch, out_1, out_3, out_5):
-        super.__init__()
+        super().__init__()
         self.l1 = torch.nn.Conv2d(in_channels = in_ch, out_channels = out_1, kernel_size = 1)
         self.l3 = torch.nn.Sequential(
             torch.nn.Conv2d(in_channels = in_ch, out_channels = out_1, kernel_size = 1),
@@ -30,3 +30,4 @@ class Inception(torch.nn.Module):
 
     def forward(x):
         return torch.cat([self.l1(x), self.l3(x), self.l5(x), self.pool(x)], dim=1)
+        
