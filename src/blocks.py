@@ -5,7 +5,7 @@ class Residual(torch.nn.Module):
         super().__init__()
         if kernel % 2:
             self.main = torch.nn.Conv2d(in_channels = in_ch, out_channels = out_ch, kernel_size = kernel, padding = (kernel - 1)//2)
-            self.blank = torch.nn.Conv2d(in_channels = in_ch, out_channels = out_ch, kernel_size = 1) if in_ch != out_ch else torch.nn.Identify()
+            self.blank = torch.nn.Conv2d(in_channels = in_ch, out_channels = out_ch, kernel_size = 1) if in_ch != out_ch else torch.nn.Identity()
             self.activation = f_act
         else:
             raise RuntimeError('Kernel size must not be even')
