@@ -30,6 +30,5 @@ class Inception(torch.nn.Module):
             torch.nn.Conv2d(in_channels = in_ch, out_channels = out_1, kernel_size = 1)
         )
 
-    def forward(x):
+    def forward(self, x):
         return torch.cat([self.l1(x), self.l3(x), self.l5(x), self.pool(x)], dim=1)
-        
