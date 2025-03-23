@@ -16,7 +16,7 @@ class SymNet(torch.nn.Module):
             torch.nn.Linear(in_features=96, out_features=64),
             torch.nn.Tanh(),
             torch.nn.Linear(in_features=64, out_features=41),
-            torch.nn.Softmax(-1)
+            torch.nn.LogSoftmax(-1)
         )
 
     def forward(self, x):
