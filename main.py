@@ -3,7 +3,6 @@ from telebot import types
 import os
 from datetime import datetime
 
-Token = '7745477532:AAE-x256XxJzdhaZH1ozMnmEa7xc3aI8g48'
 bot = telebot.TeleBot(Token)
 
 PHOTOS_DIR = 'uploaded_photos'
