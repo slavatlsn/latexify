@@ -2,13 +2,19 @@ import telebot
 from telebot import types
 import os
 from datetime import datetime
-
+Token= '7745477532:AAE-x256XxJzdhaZH1ozMnmEa7xc3aI8g48'
 bot = telebot.TeleBot(Token)
 
 PHOTOS_DIR = 'uploaded_photos'
 if not os.path.exists(PHOTOS_DIR):
     os.makedirs(PHOTOS_DIR)
 
+main_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+main_keyboard.add(
+    types.KeyboardButton("Загрузить фото"),
+    types.KeyboardButton("Помощь"),
+    types.KeyboardButton("Start")
+)
 @bot.message_handler(commands=['start'])
 def start_bot(message):
     instructions = f"""Привет, {message.from_user.first_name}!
@@ -17,14 +23,33 @@ def start_bot(message):
 2. Отправьте фото с математической формулой
 3. Получите результат в формате LaTeX """
 
-    markup = types.InlineKeyboardMarkup()
-    button_upload = types.InlineKeyboardButton(text='Загрузить фото', callback_data='upload_photo')
-    markup.add(button_upload)
-    bot.send_message(message.chat.id, instructions, reply_markup=markup)
+    bot.send_message(message.chat.id, instructions, reply_markup=main_keyboard)
 
-@bot.callback_query_handler(func=lambda call: call.data == 'upload_photo')
-def handle_upload_photo(call):
-    bot.send_message(call.message.chat.id, "Загрузите фото с математической формулой.")
+@bot.message_handler(func=lambda m: m.text == "Start")
+def handle_start_button(message):
+    start_bot(message)
+
+
+@bot.message_handler(func=lambda m: m.text == "Помощь")
+def help_command(message):
+    help_text = """Помощь 
+
+Поддерживаемые форматы:
+ - JPG/PNG
+  
+Если формула не распознается:
+1. Проверьте освещение
+2. Убедитесь, что формула четкая
+3. Попробуйте сделать новое фото
+
+Для начала работы нажмите 'Загрузить фото'"""
+
+    bot.send_message(message.chat.id, help_text, reply_markup=main_keyboard)
+
+@bot.message_handler(func=lambda m: m.text == "Загрузить фото")
+def request_photo(message):
+    bot.send_message(message.chat.id, "Пожалуйста, отправьте фото с математической формулой:",
+                    reply_markup=types.ReplyKeyboardRemove())
 
 def save_file(file_id, user_id, chat_id):
     try:
@@ -38,8 +63,9 @@ def save_file(file_id, user_id, chat_id):
 
         with open(file_path, 'wb') as new_file:
             new_file.write(downloaded_file)
-        tekst = "Фото успешно сохранено!"
-        bot.send_message(chat_id, tekst)
+
+        latex_code = "Здесь будет формула"
+        bot.send_message(chat_id, "Фото успешно обработано", reply_markup=main_keyboard)
     except Exception as e:
         error_message = f"Oшибка при обработке фото: {str(e)}"
         bot.send_message(chat_id, error_message)
