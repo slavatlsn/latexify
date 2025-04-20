@@ -1,75 +1,77 @@
 path: C:\Users/user/PycharmProjects/latexify/src/dataset/
-train: test/images
+train: train/images
 val: val/images
+test: test/images
+nc: 70
 
 names:
  0: (
  1: )
  2: a
- 3: plus
+ 3: +
  4: b
  5: c
  6: d
- 7: div
- 8: e
- 9: 8
- 10: eq
- 11: f
- 12: 5
- 13: 4
- 14: g
- 15: h
- 16: i
- 17: j
- 18: k
- 19: l
- 20: m
- 21: n
- 22: 9
- 23: o
- 24: 1
- 25: p
- 26: q
- 27: r
- 28: s
- 29: 7
- 30: 6
- 31: minus
- 32: t
- 33: 3
- 34: 2
- 35: u
- 36: v
- 37: w
- 38: x
- 39: y
- 40: z
- 41: 0
- 42: mult
- 43: A
- 44: B
- 45: C
- 46: D
- 47: E
- 48: F
- 49: G
- 50: H
- 51: I
- 52: J
- 53: K
- 54: L
- 55: M
- 56: N
- 57: O
- 58: P
- 59: Q
- 60: R
- 61: S
- 62: T
- 63: U
- 64: V
- 65: W
- 66: X
- 67: Y
- 68: Z
- 69: times
+ 7: e
+ 8: 8
+ 9: equally
+ 10: f
+ 11: 5
+ 12: 4
+ 13: g
+ 14: h
+ 15: i
+ 16: j
+ 17: k
+ 18: l
+ 19: m
+ 20: n
+ 21: 9
+ 22: o
+ 23: 1
+ 24: p
+ 25: q
+ 26: r
+ 27: s
+ 28: 7
+ 29: 6
+ 30: minus
+ 31: t
+ 32: 3
+ 33: 2
+ 34: u
+ 35: v
+ 36: w
+ 37: x
+ 38: y
+ 39: z
+ 40: 0
+ 41: mult
+ 42: A
+ 43: B
+ 44: C
+ 45: D
+ 46: E
+ 47: F
+ 48: G
+ 49: H
+ 50: I
+ 51: J
+ 52: K
+ 53: L
+ 54: M
+ 55: N
+ 56: O
+ 57: P
+ 58: Q
+ 59: R
+ 60: S
+ 61: T
+ 62: U
+ 63: V
+ 64: W
+ 65: X
+ 66: Y
+ 67: Z
+ 68: \times
+ 69: \div
