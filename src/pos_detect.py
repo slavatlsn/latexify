@@ -14,4 +14,4 @@ def data(path):
     padding = 5
     img = image(path)
     result = [map(int, el) for el in detector.predict(img, conf=0.15, device='cpu')[0].boxes.xyxy]
-    return [cv2.threshold(img[el[1]-padding:el[3]+padding, el[0]-padding:el[2]+padding], 190, 255, cv2.THRESH_BINARY)[1] for el in map(list, result)]
+    return [(cv2.threshold(img[el[1]-padding:el[3]+padding, el[0]-padding:el[2]+padding], 190, 255, cv2.THRESH_BINARY)[1], el) for el in map(list, result)]
