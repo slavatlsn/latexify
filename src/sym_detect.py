@@ -46,7 +46,7 @@ classifier = SymNet()
 classifier.load_state_dict(load("SymNet.pth", map_location=device(device)))
 classifier.eval()
 
-def symbol():
+def symbol(img_path):
     gray_img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
     input_tensor = transform(gray_img).unsqueeze(0)
     output = classifier(input_tensor)
