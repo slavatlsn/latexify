@@ -1,7 +1,6 @@
 from torch import nn, load, device, argmax
 import torchvision.transforms as t
 from blocks import Residual
-import cv2
 
 transform = t.Compose([
     t.ToPILImage(),
@@ -49,9 +48,8 @@ classifier.load_state_dict(load("SymNet.pth", map_location=device(my_device)))
 classifier.eval()
 
 
-def symbol(img_path):
-    gray_img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
-    input_tensor = transform(gray_img).unsqueeze(0)
+def symbol(img):
+    input_tensor = transform(img).unsqueeze(0)
     output = classifier(input_tensor)
     class_id = argmax(output).item()
     return label_map[class_id]
