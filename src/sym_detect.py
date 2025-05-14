@@ -1,5 +1,6 @@
 from torch import nn
 import torchvision.transforms as t
+from blocks import Residual
 import cv2
 
 transform = t.Compose([
