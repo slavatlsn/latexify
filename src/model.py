@@ -1,11 +1,7 @@
-from ultralytics import YOLO
-import os
+from pos_detect import data
+from sym_detect import symbol
+import cv2
 
-model = YOLO('yolov8n.pt')
-
-results = model.train(
-   data='dataset/dataset.yaml',
-   imgsz=640,
-   epochs=10,
-   batch=8,
-   name='yolov8n_custom')
+cut, pos = data('board.png')[3]
+cv2.imwrite('cut.png', cut)
+print(symbol(cut), pos)
