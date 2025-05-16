@@ -1,10 +1,10 @@
 from torch import nn, load, device, argmax
 import torchvision.transforms as t
+from config import my_device
 from blocks import Residual
 
 transform = t.Compose([
     t.ToPILImage(),
-    t.Resize((32, 32)),
     t.Grayscale(num_output_channels=1),
     t.ToTensor()
 ])
@@ -42,7 +42,6 @@ class SymNet(nn.Module):
         return self.network(x)
 
 
-my_device = 'cpu'
 classifier = SymNet()
 classifier.load_state_dict(load("SymNet.pth", map_location=device(my_device)))
 classifier.eval()
@@ -52,4 +51,4 @@ def symbol(img):
     input_tensor = transform(img).unsqueeze(0)
     output = classifier(input_tensor)
     class_id = argmax(output).item()
-    return label_map[class_id]
+    return label_map[class_id],
