@@ -18,13 +18,13 @@ res = {
     ('z', '3'): '2',
     ('+', '4'): '+',
     ('-', '4'): '+',
-    ('-', '2'): 'L'
 }
 
 keys = set(res.keys())
 
 
 def process(arg):
+    print(arg, end='')
     inp = (arg[1], arg[2])
     if arg[1] == arg[2]:
         r = arg[1]
@@ -41,11 +41,12 @@ def process(arg):
                 r = arg[1]
             else:
                 r = arg[2]
+    print(r)
     return arg[0], r, arg[3]
 
 
-def get_latex(path):
-    img_data = data(path)
+def get_latex(img):
+    img_data = data(img)
     if not img_data[0]:
         return ['']
     new_data = []
@@ -61,7 +62,8 @@ def get_latex(path):
             i += 1
 
     def getpos(obj):
-        return (i * (obj[0][1] + obj[0][3]) // (7 * imgh // 3), 9 * i * (obj[0][0] + obj[0][2]) // (imgl * 10)), obj[1], obj[2]
+        _obj = obj[0]
+        return ((_obj[1] + _obj[3]) // 2, (_obj[0] + _obj[2]) // 2), obj[1], obj[2]
 
     def form(obj):
         return obj[0][1], (obj[1], obj[2])
@@ -69,21 +71,31 @@ def get_latex(path):
     new_data = list(map(getpos, new_data))
     strings = []
     final = []
-    new_data.sort(key=lambda x: (x[0], x[2]))
+    new_data.sort(key=lambda x: x[0])
     prev = new_data[0][0][0]
     now = [form(new_data[0])]
     for el in new_data[1:]:
-        if el[0][0] == prev:
+        if abs(el[0][0] - prev) <= imgh // (3 * i):
             now.append(form(el))
         else:
+            now.sort(key=lambda x: (x[0], x[1][1]))
             strings.append(now)
             now = [form(el)]
         prev = el[0][0]
+    now.sort(key=lambda x: (x[0], x[1][1]))
     strings.append(now)
+    print(*strings, sep='\n')
     for s in strings:
         d = dict(s)
         buf = ''
-        for e in d.keys():
-            buf += d[e][0]
+        _keys = list(d.keys())
+        for k in range(len(_keys)):
+            sym = d[_keys[k]][0]
+            if 1 < k < len(_keys) - 1 and (d[_keys[k - 1]][0] + d[_keys[k + 1]][0]).isdigit():
+                if sym == 'x':
+                    sym = ' \\times '
+                elif sym in 'z2':
+                    sym = '2'
+            buf += sym
         final.append(buf)
     return final
